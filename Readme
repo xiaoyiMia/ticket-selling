@@ -1,0 +1,14 @@
+## Generate Auto Value implementation Classes
+* Right click on project and navigate to *Build Path -> Configure Build Path*
+* On left panel find *Java Compiler* and click to expand. Select *Annotation Processing*
+* Enable *Enable project specific settings*
+* Click *New* and add key: *defaultOverwrite*, value: *true*
+* On left panel expand *Annotation Processing* and select *Factory Path*
+* Enable *Enable project specific settings*
+* Choose *Add External JARS* and select the *auto-value-{version}.jar* file in your *.m2* folder.
+* Apply and let it rebuild. your QClasses will created under *.apt-generated* hidden folder
+
+## Install Lombok Library
+* Find *lombok-{version}.jar* in your Maven Dependencies at the *package Explorer* panel (usually it's on your left)
+* Right click and Run As *Java Application*
+* Exit you eclipse and open again
