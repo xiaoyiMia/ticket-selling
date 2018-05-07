@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.ting.ticketselling.aggregate.UserStatus;
+import org.ting.ticketselling.values.Password;
 
 @Entity
 public class Customer {
@@ -142,6 +143,14 @@ public class Customer {
 	public void setupActivationToken() {
 		if (this.getActivationToken() == null || this.getTokenExpiresAt().isBefore(ZonedDateTime.now())) {
 			this.setActivationToken(UUID.randomUUID().toString());
+		}
+	}
+	
+	public void setupPassword(Password password) {
+		if(password == null) {
+			this.setPassword(UUID.randomUUID().toString());
+		} else {
+			this.setPassword(password.hashedPassword());
 		}
 	}
 

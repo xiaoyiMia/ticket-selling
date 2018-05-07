@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.ting.jsonapi.annotations.JsonApiId;
 import org.ting.jsonapi.annotations.JsonApiResource;
+import org.ting.ticketselling.aggregate.BaseBuilder;
 import org.ting.ticketselling.aggregate.UserDto;
 import org.ting.ticketselling.aggregate.UserStatus;
 import org.ting.ticketselling.exception.InvalidField;
@@ -13,12 +14,18 @@ import org.ting.ticketselling.exception.message.InvalidData;
 import org.ting.ticketselling.values.EmailAddress;
 import org.ting.ticketselling.values.Password;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @JsonApiResource(type = "customer")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerDto extends UserDto {
 
 	@JsonApiId
 	private Long id;
 	private EmailAddress email;
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Password password;
 	private UserStatus status;
 	private String nickName;
@@ -107,6 +114,7 @@ public class CustomerDto extends UserDto {
 		} else {
 			invalidFields.add(this.password.validateForLogin("password"));
 		}
+		
 		return invalidFields;
 	}
 
@@ -114,7 +122,7 @@ public class CustomerDto extends UserDto {
 		return new Builder();
 	}
 
-	public static class Builder {
+	public static class Builder extends BaseBuilder<CustomerDto> {
 		private CustomerDto customer;
 
 		public Builder() {
@@ -156,6 +164,7 @@ public class CustomerDto extends UserDto {
 			return this;
 		}
 
+		@Override
 		public CustomerDto build() {
 			return customer;
 		}

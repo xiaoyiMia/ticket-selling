@@ -1,0 +1,31 @@
+= HuaMusic User Register REST Service API Guide
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+== Customer Registration
+
+Register an account as customer who can search concerts' information and buy tickets
+
+=== Request structure
+
+include::{snippets}/customer-register/http-request.adoc[]
+
+=== Request body
+
+include::{snippets}/customer-register/request-body.adoc[]
+
+==== Request body fields description
+
+include::{snippets}/customer-register/request-fields.adoc[]
+
+=== Response body
+
+include::{snippets}/customer-register/response-body.adoc[]
+
+=== CURL request
+
+include::{snippets}/customer-register/curl-request.adoc[]

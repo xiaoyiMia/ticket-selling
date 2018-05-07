@@ -10,8 +10,14 @@ public class InvalidRequestException extends HuaMusicException {
 	private static final long serialVersionUID = -7405772297404588896L;
 
 	private List<InvalidField> invalidFields;
+	private ExceptionLevel level;
+	
+	public InvalidRequestException() {
+		super(ExceptionLevel.Warning);
+	}
 
 	public InvalidRequestException(List<InvalidField> invalidFields) {
+		this();
 		this.invalidFields = invalidFields;
 	}
 
@@ -21,6 +27,14 @@ public class InvalidRequestException extends HuaMusicException {
 
 	public void setInvalidFields(List<InvalidField> invalidFields) {
 		this.invalidFields = invalidFields;
+	}
+
+	public ExceptionLevel getLevel() {
+		return level;
+	}
+
+	public void setLevel(ExceptionLevel level) {
+		this.level = level;
 	}
 
 	public HttpStatus getHttpStatus() {

@@ -7,6 +7,8 @@ public interface ErrorMessageEnum {
 	public HttpStatus getStatusCode();
 
 	public String getDetailCode();
+	
+	public String getTitle();
 
 	public String getDescription();
 }

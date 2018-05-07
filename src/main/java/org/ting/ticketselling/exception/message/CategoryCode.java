@@ -1,7 +1,8 @@
 package org.ting.ticketselling.exception.message;
 
 public enum CategoryCode {
-	Common("001");
+	Common("001"),
+	Registration("010");
 
 	private String categoryCode;
 

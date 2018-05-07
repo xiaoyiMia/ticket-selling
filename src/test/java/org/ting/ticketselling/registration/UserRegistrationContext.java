@@ -1,20 +1,69 @@
 package org.ting.ticketselling.registration;
 
-import org.springframework.stereotype.Component;
-import org.ting.ticketselling.aggregate.customer.CustomerDto;
+import java.time.ZonedDateTime;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+import org.ting.ticketselling.aggregate.BaseBuilder;
+import org.ting.ticketselling.aggregate.customer.Customer;
 
 @Component
 public class UserRegistrationContext {
+	
+	public String generateRegistJsonString(String email, String password) throws JSONException {
+		return new JSONObject().put("email", email).put("password", password).toString();
+	}
+	
+	public CustomerBuilder customerBuilder() {
+		return new CustomerBuilder();
+	}
 
-	public String customerRegisterContext(CustomerDto customer) {
-		JsonNode rootNode = new ObjectMapper().createObjectNode();
-		((ObjectNode) rootNode).put("email", customer.getEmail().email());
-		((ObjectNode) rootNode).put("password", customer.getPassword().password());
+	public static class CustomerBuilder extends BaseBuilder<Customer> {
+		private Customer customer;
 
-		return rootNode.toString();
+		public CustomerBuilder() {
+			customer = new Customer();
+		}
+
+		public CustomerBuilder id(Long id) {
+			customer.setId(id);
+			return this;
+		}
+
+		public CustomerBuilder email(String email) {
+			customer.setEmail(email);
+			return this;
+		}
+
+		public CustomerBuilder password(String password) {
+			customer.setPassword(password);
+			return this;
+		}
+
+		public CustomerBuilder nickName(String nickName) {
+			customer.setNickName(nickName);
+			return this;
+		}
+
+		public CustomerBuilder description(String description) {
+			customer.setDescription(description);
+			return this;
+		}
+
+		public CustomerBuilder createdAt(ZonedDateTime createdAt) {
+			customer.setCreatedAt(createdAt);
+			return this;
+		}
+
+		public CustomerBuilder updatedAt(ZonedDateTime updatedAt) {
+			customer.setUpdatedAt(updatedAt);
+			return this;
+		}
+
+		@Override
+		public Customer build() {
+			return customer;
+		}
 	}
 }
